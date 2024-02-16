@@ -21,17 +21,17 @@ class TravelPackagesController extends Controller
                 ->addColumn('action', function ($item) {
                     return '
                         <a href="' . route('travel-packages.gallery.index', $item->id) . '" >
-                        <button class="bg-blue-500 text-white rounded-md px-2 py-1 mx-2">
+                        <button class="bg-blue-500 text-white rounded-md px-2 py-1 text-sm">
                         Gallery
                         </button>
                         </a>
                         <a href="' . route('travel-packages.edit', $item->id) . '" >
-                        <button class="bg-gray-500 text-white rounded-md px-2 py-1 mx-2">
+                        <button class="bg-gray-500 text-white rounded-md px-2 py-1 text-sm">
                         Edit
                         </button>
                         </a>
                         <form action="' . route('travel-packages.destroy', $item->id) . '"  class="inline-block" method="POST">
-                        <button class="bg-red-500 text-white rounded-md px-2 py-1 mx-2">
+                        <button class="bg-red-500 text-white rounded-md px-2 py-1 text-sm">
                         Delete
                         </button>
                         ' . method_field('delete') . csrf_field() . '
@@ -76,17 +76,20 @@ class TravelPackagesController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(TravelPackage $travelPackage)
     {
-        //
+        return view('pages.dashboard.travel-packages.edit', compact('travelPackage'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(TravelPackageRequest $request, TravelPackage $travelPackage)
     {
-        //
+        $data = $request->all();
+        $data['slug'] = Str::slug($request->title);
+        $travelPackage->update($data);
+        return redirect()->route('travel-packages.index');
     }
 
     /**

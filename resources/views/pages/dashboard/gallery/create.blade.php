@@ -24,9 +24,7 @@
 										</div>
 								</div>
 						@endif
-						<a href="{{ route('travel-packages.create') }}"><button
-										class="rounded bg-blue-500 px-4 py-2 font-bold text-gray-800 transition duration-300 ease-in-out hover:bg-blue-700 dark:text-gray-200">
-										Add travel package</button></a>
+						
 						<div class="mt-10 overflow-hidden bg-white px-4 py-4 shadow-xl dark:bg-gray-800 sm:rounded-lg">
 
 

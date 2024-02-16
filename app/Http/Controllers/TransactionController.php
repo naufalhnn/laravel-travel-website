@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TransactionRequest;
 use App\Models\Transaction;
+use App\Models\TransactionDetail;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -19,17 +21,17 @@ class TransactionController extends Controller
                 ->addColumn('action', function ($item) {
                     return '
                         <a href="' . route('transactions.show', $item->id) . '" >
-                        <button class="bg-blue-500 text-white rounded-md px-2 py-1 mx-2">
+                        <button class="bg-blue-500 text-white rounded-md px-2 py-1">
                         Details
                         </button>
                         </a>
                         <a href="' . route('transactions.edit', $item->id) . '" >
-                        <button class="bg-gray-500 text-white rounded-md px-2 py-1 mx-2">
+                        <button class="bg-gray-500 text-white rounded-md px-2 py-1">
                         Edit
                         </button>
                         </a>
                         <form action="' . route('transactions.destroy', $item->id) . '"  class="inline-block" method="POST">
-                        <button class="bg-red-500 text-white rounded-md px-2 py-1 mx-2">
+                        <button class="bg-red-500 text-white rounded-md px-2 py-1">
                         Delete
                         </button>
                         ' . method_field('delete') . csrf_field() . '
@@ -63,30 +65,37 @@ class TransactionController extends Controller
      */
     public function show(Transaction $transaction, Request $request)
     {
-        //
+        $details = TransactionDetail::with('transaction')->where('transaction_id', $transaction->id)->get();
+
+        return view('pages.dashboard.transactions.show', [
+            'details' => $details,
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Transaction $transaction)
     {
-        //
+        return view('pages.dashboard.transactions.edit', compact('transaction'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(TransactionRequest $request, Transaction $transaction)
     {
-        //
+        $data = $request->all();
+        $transaction->update($data);
+        return redirect()->route('transactions.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Transaction $transaction)
     {
-        //
+        $transaction->delete();
+        return redirect()->route('transactions.index');
     }
 }

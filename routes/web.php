@@ -24,7 +24,6 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
-
     Route::resource('travel-packages', TravelPackagesController::class);
     Route::resource('travel-packages.gallery', GalleryController::class)->shallow()->only(['index', 'create', 'store', 'destroy']);
     Route::resource('transactions', TransactionController::class)->only(['index', 'show', 'edit', 'update', 'destroy']);

@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class GalleryRequest extends FormRequest
+class TransactionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,7 +23,6 @@ class GalleryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'image' => 'required|image|mimes:svg,png,jpg,jpeg,webp,jpeg|max:2048',
-        ];
+            'status' => 'required|in:PENDING,FAILED,SUCCESS,IN CART'];
     }
 }
