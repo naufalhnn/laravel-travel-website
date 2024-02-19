@@ -33,19 +33,15 @@
 
 						<!-- Mobile button -->
 						<form class="form-inline d-sm-block d-md-none">
-								<a href="{{ route('login') }}">
-										<button class="btn btn-login my-sm-0 my-2">
-												Masuk
-										</button>
+								<a href="{{ route('login') }}" class="btn btn-login my-sm-0 my-2">
+										Masuk
 								</a>
 						</form>
 						<!-- Desktop Button -->
 						@if (auth()->guest())
 								<form class="form-inline my-lg-0 d-none d-md-block my-2">
-										<a href="{{ route('login') }}">
-												<button class="btn btn-login btn-navbar-right my-sm-0 my-2 px-4">
-														Masuk
-												</button>
+										<a href="{{ route('login') }}" class="btn btn-login btn-navbar-right my-sm-0 px-4 pt-4">
+												Masuk
 										</a>
 								</form>
 						@endif

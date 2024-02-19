@@ -29,4 +29,5 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::resource('transactions', TransactionController::class)->only(['index', 'show', 'edit', 'update', 'destroy']);
 });
 
+
 Route::get('/details{slug}', [HomeController::class, 'details'])->name('details');
