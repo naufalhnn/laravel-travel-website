@@ -64,54 +64,20 @@
 						<section class="section-popular-content" id="popularContent">
 								<div class="container">
 										<div class="section-popular-travel row justify-content-center">
-												<div class="col-sm-6 col-md-4 col-lg-3">
-														<div class="card-travel d-flex flex-column text-center"
-																style="background-image: url('frontend/images/travel-1.jpg');">
-																<div class="travel-country">INDONESIA</div>
-																<div class="travel-location">DERATAN, BALI</div>
-																<div class="travel-button mt-auto">
-																		<a href="details.html" class="btn btn-travel-details px-4">
-																				View Details
-																		</a>
+												@foreach ($travelPackages as $travelPackage)
+														<div class="col-sm-6 col-md-4 col-lg-3">
+																<div class="card-travel d-flex flex-column text-center"
+																		style="background-image: url('{{ Storage::url($travelPackage->galleries->first()->image) }}');">
+																		<div class="travel-country">{{ $travelPackage->country }}</div>
+																		<div class="travel-location">{{ $travelPackage->location }}</div>
+																		<div class="travel-button mt-auto">
+																				<a href="{{ route('details', $travelPackage->slug) }}" class="btn btn-travel-details px-4">
+																						View Details
+																				</a>
+																		</div>
 																</div>
 														</div>
-												</div>
-												<div class="col-sm-6 col-md-4 col-lg-3">
-														<div class="card-travel d-flex flex-column text-center"
-																style="background-image: url('frontend/images/travel-2.jpg');">
-																<div class="travel-country">INDONESIA</div>
-																<div class="travel-location">BROMO, MALANG</div>
-																<div class="travel-button mt-auto">
-																		<a href="details.html" class="btn btn-travel-details px-4">
-																				View Details
-																		</a>
-																</div>
-														</div>
-												</div>
-												<div class="col-sm-6 col-md-4 col-lg-3">
-														<div class="card-travel d-flex flex-column text-center"
-																style="background-image: url('frontend/images/travel-3.jpg');">
-																<div class="travel-country">INDONESIA</div>
-																<div class="travel-location">NUSA PENIDA</div>
-																<div class="travel-button mt-auto">
-																		<a href="details.html" class="btn btn-travel-details px-4">
-																				View Details
-																		</a>
-																</div>
-														</div>
-												</div>
-												<div class="col-sm-6 col-md-4 col-lg-3">
-														<div class="card-travel d-flex flex-column text-center"
-																style="background-image: url('frontend/images/travel-4.jpg');">
-																<div class="travel-country">INDONESIA</div>
-																<div class="travel-location">DUBAI</div>
-																<div class="travel-button mt-auto">
-																		<a href="details.html" class="btn btn-travel-details px-4">
-																				View Details
-																		</a>
-																</div>
-														</div>
-												</div>
+												@endforeach
 										</div>
 								</div>
 						</section>
