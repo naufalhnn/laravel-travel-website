@@ -34,7 +34,7 @@
 																{{ old('transaction_status') ?? $transaction->transaction_status }}</option>
 														<option value="" disabled>-----</option>
 														<option value="PENDING">PENDING</option>
-														<option value="FAILED">FAILED</option>
+														<option value="CANCELED">CANCELED</option>
 														<option value="SUCCESS">SUCCESS</option>
 														<option value="IN CART">IN CART</option>
 												</select>

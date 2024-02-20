@@ -1,4 +1,4 @@
-@extends('layouts.home')
+@extends('layouts.page')
 @section('title')
 		NOMADS
 @endsection

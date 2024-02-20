@@ -1,4 +1,4 @@
-@extends('layouts.home')
+@extends('layouts.page')
 @section('title')
 		NOMADS
 @endsection
@@ -10,55 +10,8 @@
 
 				<!-- Bootstrap navbar example -->
 				<!-- https://www.w3schools.com/bootstrap4/bootstrap_navbar.asp -->
-				<div class="container">
-						<nav class="row navbar navbar-expand-lg navbar-light bg-white">
-								<a class="navbar-brand" href="index.html">
-										<img src="frontend/images/logo.png" alt="" />
-								</a>
-								<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navb">
-										<span class="navbar-toggler-icon"></span>
-								</button>
-
-								<!-- Menu -->
-								<div class="navbar-collapse collapse" id="navb">
-										<ul class="navbar-nav ml-auto mr-3">
-												<li class="nav-item mx-md-2">
-														<a class="nav-link active" href="index.html">Home</a>
-												</li>
-												<li class="nav-item mx-md-2">
-														<a class="nav-link" href="#">Paket Travel</a>
-												</li>
-												<li class="nav-item dropdown">
-														<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-																Services
-														</a>
-														<div class="dropdown-menu">
-																<a class="dropdown-item" href="#">Link 1</a>
-																<a class="dropdown-item" href="#">Link 2</a>
-																<a class="dropdown-item" href="#">Link 3</a>
-														</div>
-												</li>
-												<li class="nav-item mx-md-2">
-														<a class="nav-link" href="#">Testimonial</a>
-												</li>
-										</ul>
-
-										<!-- Mobile button -->
-										<form class="form-inline d-sm-block d-md-none">
-												<button class="btn btn-login my-sm-0 my-2">
-														Masuk
-												</button>
-										</form>
-										<!-- Desktop Button -->
-										<form class="form-inline my-lg-0 d-none d-md-block my-2">
-												<button class="btn btn-login btn-navbar-right my-sm-0 my-2 px-4">
-														Masuk
-												</button>
-										</form>
-								</div>
-						</nav>
-				</div>
 				<main>
+						@include('includes.navbar')
 						<section class="section-details-header"></section>
 						<section class="section-details-content">
 								<div class="container">
@@ -102,21 +55,21 @@
 																		</p>
 																		<div class="features row pt-3">
 																				<div class="col-md-4">
-																						<img src="frontend/images/ic_event.png" alt="" class="features-image" />
+																						<img src="{{ url('frontend/images/ic_event.png') }}" alt="" class="features-image" />
 																						<div class="description">
 																								<h3>Featured Event</h3>
 																								<p>{{ $travelPackage->featured_event }}</p>
 																						</div>
 																				</div>
 																				<div class="col-md-4 border-left">
-																						<img src="frontend/images/ic_bahasa.png" alt="" class="features-image" />
+																						<img src="{{ url('frontend/images/ic_bahasa.png') }}" alt="" class="features-image" />
 																						<div class="description">
 																								<h3>Language</h3>
 																								<p>{{ $travelPackage->language }}</p>
 																						</div>
 																				</div>
 																				<div class="col-md-4 border-left">
-																						<img src="frontend/images/ic_foods.png" alt="" class="features-image" />
+																						<img src="{{ url('frontend/images/ic_foods.png') }}" alt="" class="features-image" />
 																						<div class="description">
 																								<h3>Foods</h3>
 																								<p>{{ $travelPackage->foods }}</p>
@@ -137,24 +90,25 @@
 																<table class="trip-informations">
 																		<tr>
 																				<th width="50%">Date of Departure</th>
-																				<td width="50%" class="text-right">22 Aug, 2019</td>
+																				<td width="50%" class="text-right">{{ $travelPackage->departure_date }}</td>
 																		</tr>
 																		<tr>
 																				<th width="50%">Duration</th>
-																				<td width="50%" class="text-right">4D 3N</td>
+																				<td width="50%" class="text-right">{{ $travelPackage->duration }}</td>
 																		</tr>
 																		<tr>
 																				<th width="50%">Type</th>
-																				<td width="50%" class="text-right">Open Trip</td>
+																				<td width="50%" class="text-right">{{ $travelPackage->type }}</td>
 																		</tr>
 																		<tr>
 																				<th width="50%">Price</th>
-																				<td width="50%" class="text-right">$80,00 / person</td>
+																				<td width="50%" class="text-right">{{ $travelPackage->price }}</td>
 																		</tr>
 																</table>
 														</div>
 														<div class="join-container">
-																<a href="checkout.html" class="btn btn-block btn-join-now mt-3 py-2">Join Now</a>
+																<a href="{{ route('checkout', $travelPackage->slug) }}" class="btn btn-block btn-join-now mt-3 py-2">Join
+																		Now</a>
 														</div>
 												</div>
 										</div>
@@ -164,7 +118,7 @@
 
 				@include('includes.footer')
 
-				<script src="frontend/libraries/xzoom/dist/xzoom.min.js"></script>
+				<script src="{{ url('frontend/libraries/xzoom/dist/xzoom.min.js') }}"></script>
 				<script>
 						$(document).ready(function() {
 								$('.xzoom, .xzoom-gallery').xzoom({

@@ -29,5 +29,9 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::resource('transactions', TransactionController::class)->only(['index', 'show', 'edit', 'update', 'destroy']);
 });
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('/checkout/{slug}', [HomeController::class, 'checkout'])->name('checkout')->middleware('auth', 'verified');
+    Route::get('/checkout/{slug}/success', [HomeController::class, 'success'])->name('checkout-success');
+});
 
-Route::get('/details{slug}', [HomeController::class, 'details'])->name('details');
+Route::get('/details/{slug}', [HomeController::class, 'details'])->name('details');
